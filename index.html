@@ -3,405 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Шифратор файлов Pro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Шифратор файлов Pro - Улучшенный UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Общие стили */
-        :root {
-            --primary-color: #007bff;
-            --primary-hover-color: #0056b3;
-            --secondary-color: #6c757d;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --warning-color: #ffc107;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --border-radius: 0.3rem;
-            --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-        }
-
+        /* Custom CSS for elements not easily styled with Tailwind or for specific overrides */
         body {
-            font-family: var(--font-family);
-            margin: 0;
-            background-color: #e9ecef;
-            color: var(--dark-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            width: 100%;
-            max-width: 700px;
-            margin-top: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        header p {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .tab-button {
-            padding: 10px 20px;
-            cursor: pointer;
-            border: none;
-            background-color: transparent;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--secondary-color);
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .tab-button.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-        }
-        .tab-button i { margin-right: 8px; }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: var(--dark-color);
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #495057;
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        input[type="password"],
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: var(--border-radius);
-            box-sizing: border-box;
-            font-size: 1rem;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-
-        input[type="password"] {
-            padding-right: 40px; /* Space for the eye icon */
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .password-toggle {
             position: absolute;
             top: 50%;
-            right: 10px;
+            right: 1rem; /* 16px */
             transform: translateY(-50%);
             cursor: pointer;
-            color: var(--secondary-color);
         }
 
-
-        input:focus, select:focus {
-            border-color: var(--primary-color);
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
-
-        .file-drop-area {
-            border: 2px dashed #ced4da;
-            border-radius: var(--border-radius);
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            background-color: var(--light-color);
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .file-drop-area.dragover {
-            background-color: #e2e6ea;
-            border-color: var(--primary-color);
-        }
-        .file-drop-area p {
-            margin: 0;
-            font-size: 1rem;
-            color: var(--secondary-color);
-        }
-        .file-drop-area i {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        .file-drop-area input[type="file"] {
-            display: none;
-        }
-        .file-list {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #495057;
-            min-height: 1.2em; /* Prevent layout shift */
-        }
-
-
-        .main-button {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .main-button i { margin-right: 8px; }
-        .main-button:hover { background-color: var(--primary-hover-color); }
-        .main-button:disabled {
-            background-color: #adb5bd;
-            cursor: not-allowed;
-        }
         .main-button .loader {
             border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid #fff;
+            border-top-color: #fff; /* Keep consistent with button text color */
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            animation: spin 1s linear infinite;
+            width: 20px; /* Slightly larger */
+            height: 20px;
+            animation: spin 0.8s linear infinite;
             display: none; /* Hidden by default */
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         .main-button.processing .button-text { display: none; }
         .main-button.processing .loader { display: inline-block; }
 
-
-        .status-message {
-            margin-top: 15px;
-            padding: 10px 15px;
-            border-radius: var(--border-radius);
-            font-size: 0.95rem;
-            display: none; /* Hidden by default */
-            border: 1px solid transparent;
+        /* Enhance focus states for accessibility and visual feedback */
+        input[type="password"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-color: theme('colors.indigo.500'); /* Tailwind's indigo-500 */
+            box-shadow: 0 0 0 2px var(--tw-ring-color);
+            border-color: theme('colors.indigo.500');
         }
-        .status-message.success {
-            background-color: #d4edda;
-            color: #155724;
-            border-color: #c3e6cb;
-            display: block;
+        
+        /* Custom scrollbar for a more modern look (optional, browser support varies) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        .status-message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border-color: #f5c6cb;
-            display: block;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
-        .status-message.info {
-            background-color: #cce5ff;
-            color: #004085;
-            border-color: #b8daff;
-            display: block;
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
         }
-
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e9ecef;
-            border-radius: var(--border-radius);
-            margin-top: 10px;
-            height: 12px; 
-            overflow: hidden;
-            display: none; 
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
         }
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background-color: var(--success-color);
-            text-align: center;
-            line-height: 12px; 
-            color: white;
-            font-size: 0.7rem;
-            transition: width 0.1s ease-out;
-        }
-        .form-group small {
-            font-size: 0.85em;
-            color: var(--secondary-color);
-            display: block;
-            margin-top: 5px;
+        
+        .tab-button.active {
+             border-color: theme('colors.indigo.600');
+             color: theme('colors.indigo.600');
         }
 
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-            font-size: 0.9rem;
-            color: var(--secondary-color);
+        .tab-content {
+            animation: fadeIn 0.5s ease-out;
         }
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-shield-alt"></i> Шифратор файлов Pro</h1>
-            <p>Безопасно шифруйте и расшифровывайте ваши файлы и папки прямо в браузере.</p>
+<body class="bg-gradient-to-br from-slate-50 via-gray-100 to-slate-200 text-gray-800 flex flex-col items-center min-h-screen p-4 sm:p-6 md:p-8">
+
+    <div class="container bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-2xl w-full max-w-3xl my-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+                <i class="fas fa-shield-alt text-indigo-600"></i>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                    Шифратор файлов Pro
+                </span>
+            </h1>
+            <p class="text-md sm:text-lg text-gray-600">Безопасно шифруйте и расшифровывайте ваши файлы и папки прямо в браузере.</p>
         </header>
 
-        <div class="tabs">
-            <button class="tab-button active" data-tab="encrypt-tab"><i class="fas fa-lock"></i> Шифрование</button>
-            <button class="tab-button" data-tab="decrypt-tab"><i class="fas fa-unlock-alt"></i> Дешифрование</button>
+        <div class="tabs flex border-b border-gray-300 mb-6">
+            <button class="tab-button flex-1 sm:flex-initial py-3 px-4 sm:px-6 text-sm sm:text-base font-medium text-gray-500 hover:text-indigo-600 border-b-2 border-transparent focus:outline-none transition-colors duration-200 active" data-tab="encrypt-tab">
+                <i class="fas fa-lock mr-2"></i> Шифрование
+            </button>
+            <button class="tab-button flex-1 sm:flex-initial py-3 px-4 sm:px-6 text-sm sm:text-base font-medium text-gray-500 hover:text-indigo-600 border-b-2 border-transparent focus:outline-none transition-colors duration-200" data-tab="decrypt-tab">
+                <i class="fas fa-unlock-alt mr-2"></i> Дешифрование
+            </button>
         </div>
 
         <!-- Секция Шифрования -->
         <div id="encrypt-tab" class="tab-content active">
-            <h2>Зашифровать файлы/папки</h2>
-            <div class="form-group">
-                <label for="encrypt-folder-input-trigger">1. Выберите папку (опционально, для сохранения структуры):</label>
-                <div id="encrypt-folder-drop-area" class="file-drop-area">
-                    <input type="file" id="encrypt-folder-input" webkitdirectory directory multiple> <!-- multiple for safety, though one folder is typical -->
-                    <i class="fas fa-folder-open"></i>
-                    <p>Перетащите папку сюда или <strong>нажмите, чтобы выбрать папку</strong></p>
-                </div>
-                <div id="encrypt-folder-list" class="file-list">Папка не выбрана.</div>
-            </div>
-
-            <div class="form-group">
-                <label for="encrypt-files-input-trigger">2. Или/И выберите отдельные файлы (опционально):</label>
-                <div id="encrypt-files-drop-area" class="file-drop-area">
-                    <input type="file" id="encrypt-files-input" multiple>
-                    <i class="fas fa-file-alt"></i>
-                    <p>Перетащите файлы сюда или <strong>нажмите, чтобы выбрать файлы</strong></p>
-                </div>
-                <div id="encrypt-files-list" class="file-list">Файлы не выбраны.</div>
-            </div>
-
-            <div class="form-group">
-                <label for="encrypt-password">3. Ключ (пароль для шифрования):</label>
-                <div class="input-group">
-                    <input type="password" id="encrypt-password" placeholder="Надежный пароль">
-                    <span class="password-toggle" onclick="togglePasswordVisibility('encrypt-password')"><i class="fas fa-eye"></i></span>
-                </div>
-            </div>
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-6 pb-3 border-b border-gray-200">Настройки шифрования</h2>
             
-            <div class="form-group">
-                <label for="encrypt-algo">4. Алгоритм шифрования:</label>
-                <select id="encrypt-algo" class="form-control">
-                    <option value="aes" selected>AES (Рекомендуется)</option>
-                </select>
-                <small>AES использует режим CBC и PKCS7 padding. Ключ генерируется из вашего пароля с использованием соли.</small>
+            <div class="form-group mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-3">1. Выберите исходные данные для шифрования:</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                    <!-- Левая колонка: Загрузка папки -->
+                    <div>
+                        <div id="encrypt-folder-drop-area" class="file-drop-area border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer bg-gray-50 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-200 flex flex-col items-center justify-center min-h-[200px] h-full">
+                            <input type="file" id="encrypt-folder-input" webkitdirectory directory multiple class="hidden">
+                            <i class="fas fa-folder-plus text-4xl text-indigo-500 mb-3"></i>
+                            <p class="text-gray-700 font-semibold text-base mb-1">Загрузить папку</p>
+                            <p class="text-sm text-gray-500">Перетащите или <strong class="text-indigo-600">нажмите</strong></p>
+                            <p class="text-xs text-gray-400 mt-1">(сохраняет структуру)</p>
+                        </div>
+                        <div id="encrypt-folder-list" class="file-list mt-2 text-xs sm:text-sm text-gray-500 italic bg-gray-50 p-2 rounded-md border border-gray-200 min-h-[2.5em] flex items-center">Папка не выбрана.</div>
+                    </div>
+                    <!-- Правая колонка: Загрузка файлов -->
+                    <div>
+                        <div id="encrypt-files-drop-area" class="file-drop-area border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer bg-gray-50 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-200 flex flex-col items-center justify-center min-h-[200px] h-full">
+                            <input type="file" id="encrypt-files-input" multiple class="hidden">
+                            <i class="fas fa-file-medical text-4xl text-indigo-500 mb-3"></i>
+                            <p class="text-gray-700 font-semibold text-base mb-1">Выбрать файлы</p>
+                            <p class="text-sm text-gray-500">Перетащите или <strong class="text-indigo-600">нажмите</strong></p>
+                            <p class="text-xs text-gray-400 mt-1">(в корень архива)</p>
+                        </div>
+                        <div id="encrypt-files-list" class="file-list mt-2 text-xs sm:text-sm text-gray-500 italic bg-gray-50 p-2 rounded-md border border-gray-200 min-h-[2.5em] flex items-center">Файлы не выбраны.</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="encrypt-filename">5. Имя выходного файла (без .zip.aes):</label>
-                <input type="text" id="encrypt-filename" value="encrypted_archive">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                <div class="form-group mb-6">
+                    <label for="encrypt-password" class="block text-sm font-medium text-gray-700 mb-2">2. Ключ (пароль для шифрования):</label>
+                    <div class="input-group relative">
+                        <input type="password" id="encrypt-password" placeholder="Надежный пароль" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200 ease-in-out">
+                        <span class="password-toggle text-gray-500 hover:text-indigo-600" onclick="togglePasswordVisibility('encrypt-password')"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-6">
+                    <label for="encrypt-algo" class="block text-sm font-medium text-gray-700 mb-2">3. Алгоритм шифрования:</label>
+                    <select id="encrypt-algo" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200 ease-in-out bg-white">
+                        <option value="aes" selected>AES (Рекомендуется)</option>
+                    </select>
+                </div>
+            </div>
+            <small class="block text-xs text-gray-500 mb-6 -mt-4">AES использует режим CBC и PKCS7 padding. Ключ генерируется из вашего пароля с использованием соли.</small>
+
+
+            <div class="form-group mb-6">
+                <label for="encrypt-filename" class="block text-sm font-medium text-gray-700 mb-2">4. Имя выходного файла (без .zip.aes):</label>
+                <input type="text" id="encrypt-filename" value="encrypted_archive" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200 ease-in-out">
             </div>
 
-            <button id="encrypt-button" class="main-button">
-                <span class="button-text"><i class="fas fa-file-archive"></i> Зашифровать и скачать</span>
+            <button id="encrypt-button" class="main-button bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all duration-200 ease-in-out w-full flex items-center justify-center text-base">
+                <span class="button-text"><i class="fas fa-file-archive mr-2"></i> Зашифровать и скачать</span>
                 <span class="loader"></span>
             </button>
-            <div id="encrypt-progress-container" class="progress-bar-container">
-                <div id="encrypt-progress-bar" class="progress-bar"></div>
+            <div id="encrypt-progress-container" class="progress-bar-container w-full bg-gray-200 rounded-full h-3.5 mt-4 overflow-hidden hidden">
+                <div id="encrypt-progress-bar" class="progress-bar bg-green-500 h-full rounded-full transition-all duration-100 ease-out flex items-center justify-center text-xs text-white" style="width: 0%;"></div>
             </div>
-            <div id="encrypt-status" class="status-message"></div>
+            <div id="encrypt-status" class="status-message mt-4 px-4 py-3 rounded-lg text-sm hidden"></div>
         </div>
 
         <!-- Секция Дешифрования -->
-        <div id="decrypt-tab" class="tab-content">
-            <h2>Расшифровать .zip.aes файл в .zip</h2>
-            <div class="form-group">
-                <label for="decrypt-file-input-trigger">1. Выберите .zip.aes файл:</label>
-                 <div id="decrypt-file-drop-area" class="file-drop-area">
-                    <input type="file" id="decrypt-file-input" accept=".aes,.zip.aes">
-                    <i class="fas fa-file-import"></i>
-                    <p>Перетащите .zip.aes файл сюда или <strong>нажмите, чтобы выбрать</strong></p>
+        <div id="decrypt-tab" class="tab-content hidden">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-6 pb-3 border-b border-gray-200">Расшифровать .zip.aes файл</h2>
+            
+            <div class="form-group mb-6">
+                <label for="decrypt-file-input-trigger" class="block text-sm font-medium text-gray-700 mb-2">1. Выберите .zip.aes файл:</label>
+                 <div id="decrypt-file-drop-area" class="file-drop-area border-2 border-dashed border-gray-300 rounded-lg p-6 sm:p-8 text-center cursor-pointer bg-gray-50 hover:border-indigo-500 hover:bg-indigo-50 transition-all duration-200">
+                    <input type="file" id="decrypt-file-input" accept=".aes,.zip.aes" class="hidden">
+                    <i class="fas fa-file-import text-4xl sm:text-5xl text-indigo-500 mb-3"></i>
+                    <p class="text-gray-600 text-sm sm:text-base">Перетащите .zip.aes файл сюда или <strong class="text-indigo-600 font-semibold">нажмите, чтобы выбрать</strong></p>
                 </div>
-                <div id="decrypt-file-list" class="file-list">Файл не выбран.</div>
+                <div id="decrypt-file-list" class="file-list mt-2 text-xs sm:text-sm text-gray-500 italic bg-gray-50 p-2 rounded-md border border-gray-200 min-h-[2.5em] flex items-center">Файл не выбран.</div>
             </div>
 
-            <div class="form-group">
-                <label for="decrypt-password">2. Ключ (пароль для дешифрования):</label>
-                 <div class="input-group">
-                    <input type="password" id="decrypt-password" placeholder="Пароль, которым шифровали">
-                    <span class="password-toggle" onclick="togglePasswordVisibility('decrypt-password')"><i class="fas fa-eye"></i></span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                <div class="form-group mb-6">
+                    <label for="decrypt-password" class="block text-sm font-medium text-gray-700 mb-2">2. Ключ (пароль для дешифрования):</label>
+                     <div class="input-group relative">
+                        <input type="password" id="decrypt-password" placeholder="Пароль, которым шифровали" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200 ease-in-out">
+                        <span class="password-toggle text-gray-500 hover:text-indigo-600" onclick="togglePasswordVisibility('decrypt-password')"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+
+                 <div class="form-group mb-6">
+                    <label for="decrypt-algo" class="block text-sm font-medium text-gray-700 mb-2">3. Алгоритм дешифрования:</label>
+                    <select id="decrypt-algo" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200 ease-in-out bg-white">
+                        <option value="aes" selected>AES (Использовался при шифровании)</option>
+                    </select>
                 </div>
             </div>
+            <small class="block text-xs text-gray-500 mb-6 -mt-4">Убедитесь, что выбран тот же алгоритм, что и при шифровании.</small>
 
-             <div class="form-group">
-                <label for="decrypt-algo">3. Алгоритм дешифрования:</label>
-                <select id="decrypt-algo" class="form-control">
-                    <option value="aes" selected>AES (Использовался при шифровании)</option>
-                </select>
-                 <small>Убедитесь, что выбран тот же алгоритм, что и при шифровании.</small>
+            <div class="form-group mb-6">
+                <label for="decrypt-filename" class="block text-sm font-medium text-gray-700 mb-2">4. Имя выходного файла (без .zip):</label>
+                <input type="text" id="decrypt-filename" value="decrypted_archive" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200 ease-in-out">
+                 <small class="block text-xs text-gray-500 mt-1">Результатом будет .zip файл, который вы сможете распаковать.</small>
             </div>
 
-            <div class="form-group">
-                <label for="decrypt-filename">4. Имя выходного файла (без .zip):</label>
-                <input type="text" id="decrypt-filename" value="decrypted_archive">
-                 <small>Результатом будет .zip файл, который вы сможете распаковать.</small>
-            </div>
-
-            <button id="decrypt-button" class="main-button">
-                <span class="button-text"><i class="fas fa-file-zipper"></i> Расшифровать и скачать .zip</span>
+            <button id="decrypt-button" class="main-button bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all duration-200 ease-in-out w-full flex items-center justify-center text-base">
+                <span class="button-text"><i class="fas fa-file-zipper mr-2"></i> Расшифровать и скачать .zip</span>
                 <span class="loader"></span>
             </button>
-            <div id="decrypt-status" class="status-message"></div>
+            <div id="decrypt-status" class="status-message mt-4 px-4 py-3 rounded-lg text-sm hidden"></div>
         </div>
     </div>
 
-    <footer>
+    <footer class="text-center mt-auto mb-8 pt-6 border-t border-gray-300/70 text-sm text-gray-500 w-full max-w-3xl">
         <p>&copy; <span id="currentYear"></span> Шифратор файлов Pro. Все операции выполняются в вашем браузере.</p>
-        <p>Создано с <i class="fas fa-heart" style="color: #dc3545;"></i> и технологиями: 
-            <a href="https://github.com/brix/crypto-js" target="_blank" rel="noopener">CryptoJS</a>, 
-            <a href="https://stuk.github.io/jszip/" target="_blank" rel="noopener">JSZip</a>, 
-            <a href="https://github.com/eligrey/FileSaver.js/" target="_blank" rel="noopener">FileSaver.js</a>.
+        <p class="mt-1">Создано с <i class="fas fa-heart text-red-500"></i> и технологиями: 
+            <a href="https://github.com/brix/crypto-js" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">CryptoJS</a>, 
+            <a href="https://stuk.github.io/jszip/" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">JSZip</a>, 
+            <a href="https://github.com/eligrey/FileSaver.js/" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">FileSaver.js</a>.
         </p>
     </footer>
 
@@ -420,7 +241,7 @@
         const encryptFolderList = document.getElementById('encrypt-folder-list');
 
         const encryptFilesDropArea = document.getElementById('encrypt-files-drop-area');
-        const encryptFilesInput = document.getElementById('encrypt-files-input'); // For individual files
+        const encryptFilesInput = document.getElementById('encrypt-files-input');
         const encryptFilesList = document.getElementById('encrypt-files-list');
 
         const encryptPasswordInput = document.getElementById('encrypt-password');
@@ -446,11 +267,13 @@
         // --- Tab Functionality ---
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active', 'text-indigo-600', 'border-indigo-600'));
+                tabContents.forEach(content => content.classList.add('hidden')); // Use Tailwind 'hidden'
 
-                button.classList.add('active');
-                document.getElementById(button.dataset.tab).classList.add('active');
+                button.classList.add('active', 'text-indigo-600', 'border-indigo-600');
+                const activeTabContent = document.getElementById(button.dataset.tab);
+                activeTabContent.classList.remove('hidden');
+                activeTabContent.classList.add('active'); 
             });
         });
 
@@ -475,54 +298,50 @@
 
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropAreaElement.addEventListener(eventName, preventDefaults, false);
-                // Prevent body from handling drops if they are over our drop area
-                if (eventName === 'dragover' || eventName === 'drop') {
-                     dropAreaElement.addEventListener(eventName, (e) => {
-                        if (e.target === dropAreaElement || dropAreaElement.contains(e.target)) {
-                           // Body default prevention is already handled, but ensure drop area gets priority
-                        }
-                    }, false);
-                } else {
-                     document.body.addEventListener(eventName, preventDefaults, false); // For general drag over window
-                }
+                document.body.addEventListener(eventName, preventDefaults, false); 
             });
 
             ['dragenter', 'dragover'].forEach(eventName => {
-                dropAreaElement.addEventListener(eventName, () => dropAreaElement.classList.add('dragover'), false);
+                dropAreaElement.addEventListener(eventName, () => {
+                    dropAreaElement.classList.add('bg-indigo-100', 'border-indigo-600'); 
+                }, false);
             });
 
             ['dragleave', 'drop'].forEach(eventName => {
-                dropAreaElement.addEventListener(eventName, () => dropAreaElement.classList.remove('dragover'), false);
+                dropAreaElement.addEventListener(eventName, () => {
+                    dropAreaElement.classList.remove('bg-indigo-100', 'border-indigo-600');
+                }, false);
             });
 
             dropAreaElement.addEventListener('drop', (e) => {
-                // For folder drop, dataTransfer.items might be better but files is simpler for now.
-                // Note: Dragging a folder might only give one item in e.dataTransfer.files.
-                // The `webkitdirectory` attribute is primarily for the click-to-select dialog.
-                // For drag-and-drop of folders, browser behavior varies. We'll rely on click for reliable folder selection.
                 fileInputElement.files = e.dataTransfer.files;
                 updateFileListUI(fileInputElement, fileListElement, isFolderInput);
-                if (isFolderInput && fileInputElement.files.length > 0 && fileInputElement.files[0].webkitRelativePath) {
-                    const folderName = fileInputElement.files[0].webkitRelativePath.split('/')[0];
-                    if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
-                } else if (!isFolderInput && fileInputElement.files.length > 0 && encryptFilenameInput.value === 'encrypted_archive') {
-                     encryptFilenameInput.value = sanitizeFilename(fileInputElement.files[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
-                }
+                autoSuggestFilename(isFolderInput);
             }, false);
 
             fileInputElement.addEventListener('change', () => {
                  updateFileListUI(fileInputElement, fileListElement, isFolderInput);
-                 if (isFolderInput && fileInputElement.files.length > 0 && fileInputElement.files[0].webkitRelativePath) {
-                    const folderName = fileInputElement.files[0].webkitRelativePath.split('/')[0];
-                    if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
-                } else if (!isFolderInput && fileInputElement.files.length > 0 && encryptFilenameInput.value === 'encrypted_archive' && !encryptFolderInput.files.length) {
-                    // Set filename from individual files only if folder is not selected or default name is present
-                     encryptFilenameInput.value = sanitizeFilename(fileInputElement.files[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
-                }
+                 autoSuggestFilename(isFolderInput);
             });
         }
         
+        function autoSuggestFilename(isFolderInputForCurrentDrop){
+            // Only suggest if encrypt tab is active and it's for encryption inputs
+            if(!document.getElementById('encrypt-tab').classList.contains('active')) return;
+            if(isFolderInputForCurrentDrop && encryptFolderInput.files.length > 0 && encryptFolderInput.files[0].webkitRelativePath) {
+                const folderName = encryptFolderInput.files[0].webkitRelativePath.split('/')[0];
+                if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
+            } else if (!isFolderInputForCurrentDrop && encryptFilesInput.files.length > 0 && encryptFolderInput.files.length === 0) { 
+                 // Only suggest from files if folder is NOT selected and it was a file input change
+                 encryptFilenameInput.value = sanitizeFilename(encryptFilesInput.files[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
+            } else if (encryptFolderInput.files.length === 0 && encryptFilesInput.files.length === 0) {
+                 encryptFilenameInput.value = 'encrypted_archive'; // Reset if both empty
+            }
+        }
+
+
         function sanitizeFilename(name) {
+            if(!name) return '';
             return name.replace(/[^a-z0-9_.-]/gi, '_').replace(/__+/g, '_');
         }
 
@@ -536,13 +355,11 @@
             if (!files || files.length === 0) {
                 listElement.textContent = isFolder ? 'Папка не выбрана.' : (inputElement.id.includes('decrypt') ? 'Файл не выбран.' : 'Файлы не выбраны.');
             } else if (isFolder) {
-                // For folder, webkitRelativePath gives the path inside the folder.
-                // The first file's path component is the folder name.
                 const folderName = files[0].webkitRelativePath ? files[0].webkitRelativePath.split('/')[0] : "Выбранная папка";
-                listElement.textContent = `Выбрана папка: ${folderName} (${files.length} элемент(ов) внутри)`;
+                listElement.textContent = `Папка: ${folderName} (${files.length} файл(ов))`;
             }
             else if (files.length === 1) {
-                listElement.textContent = `Выбран файл: ${files[0].name}`;
+                listElement.textContent = `Файл: ${files[0].name}`;
             } else {
                 listElement.textContent = `Выбрано файлов: ${files.length}`;
             }
@@ -550,33 +367,48 @@
 
         setupFileDrop(encryptFolderDropArea, encryptFolderInput, encryptFolderList, true);
         setupFileDrop(encryptFilesDropArea, encryptFilesInput, encryptFilesList, false);
-        setupFileDrop(decryptFileDropArea, decryptFileInput, decryptFileList, false);
+        setupFileDrop(decryptFileDropArea, decryptFileInput, decryptFileList, false); // Decrypt list uses its own logic for filename
 
 
         // --- Status & Button Helpers ---
         function setOperationStatus(element, message, type = 'info') {
             element.textContent = message;
-            element.className = `status-message ${type}`; // Resets other types
+            element.classList.remove('hidden', 'bg-green-100', 'border-green-400', 'text-green-700', 'bg-red-100', 'border-red-400', 'text-red-700', 'bg-blue-100', 'border-blue-400', 'text-blue-700'); 
+            element.classList.remove('hidden'); 
+            
+            switch (type) {
+                case 'success':
+                    element.classList.add('bg-green-100', 'border', 'border-green-400', 'text-green-700');
+                    break;
+                case 'error':
+                    element.classList.add('bg-red-100', 'border', 'border-red-400', 'text-red-700');
+                    break;
+                case 'info':
+                default:
+                    element.classList.add('bg-blue-100', 'border', 'border-blue-400', 'text-blue-700');
+                    break;
+            }
         }
 
         function setButtonLoadingState(button, isLoading) {
             button.disabled = isLoading;
             if (isLoading) {
-                button.classList.add('processing');
+                button.classList.add('processing', 'opacity-75', 'cursor-not-allowed');
             } else {
-                button.classList.remove('processing');
+                button.classList.remove('processing', 'opacity-75', 'cursor-not-allowed');
             }
         }
         
         function updateZipProgress(percentage) {
             encryptProgressBar.style.width = percentage + '%';
             encryptProgressBar.textContent = percentage > 5 ? Math.round(percentage) + '%' : '';
-            encryptProgressContainer.style.display = (percentage > 0 && percentage < 100) ? 'block' : 'none';
-             if (percentage >= 100 || percentage === 0) {
-                setTimeout(() => { 
-                    encryptProgressContainer.style.display = 'none';
-                     encryptProgressBar.style.width = '0%';
-                     encryptProgressBar.textContent = '';
+            if (percentage > 0 && percentage < 100) {
+                encryptProgressContainer.classList.remove('hidden');
+            } else {
+                 setTimeout(() => { 
+                    encryptProgressContainer.classList.add('hidden');
+                    encryptProgressBar.style.width = '0%';
+                    encryptProgressBar.textContent = '';
                 }, 500);
             }
         }
@@ -590,7 +422,7 @@
 
             const password = encryptPasswordInput.value;
             let outputFilename = encryptFilenameInput.value.trim();
-            if (!outputFilename) {
+            if (!outputFilename) { // Fallback if auto-suggestion didn't run or was cleared
                 if (folderInputFiles.length > 0 && folderInputFiles[0].webkitRelativePath) {
                      outputFilename = sanitizeFilename(folderInputFiles[0].webkitRelativePath.split('/')[0]) + "_encrypted";
                 } else if (individualInputFiles.length > 0) {
@@ -598,12 +430,11 @@
                 } else {
                     outputFilename = 'encrypted_archive';
                 }
-                encryptFilenameInput.value = outputFilename; // Update UI
+                encryptFilenameInput.value = outputFilename;
             }
 
             const algorithm = encryptAlgoSelect.value;
-
-            encryptStatus.style.display = 'none';
+            encryptStatus.classList.add('hidden');
             updateZipProgress(0);
 
             if (filesToProcess.length === 0) {
@@ -627,16 +458,16 @@
                     zip.file(filePath, file);
                 }
                 
-                encryptProgressContainer.style.display = 'block';
+                encryptProgressContainer.classList.remove('hidden');
 
                 const zipBlob = await zip.generateAsync(
                     { type: "blob", compression: "DEFLATE", streamFiles: true },
                     (metadata) => {
                         updateZipProgress(metadata.percent);
                         if (metadata.currentFile) {
-                             setOperationStatus(encryptStatus, `Архивирование: ${metadata.currentFile.substring(0,30)}... (${Math.round(metadata.percent)}%)`, 'info', true);
+                             setOperationStatus(encryptStatus, `Архивирование: ${metadata.currentFile.substring(0,30)}... (${Math.round(metadata.percent)}%)`, 'info');
                         } else if (metadata.percent < 100) {
-                             setOperationStatus(encryptStatus, `Архивирование... (${Math.round(metadata.percent)}%)`, 'info', true);
+                             setOperationStatus(encryptStatus, `Архивирование... (${Math.round(metadata.percent)}%)`, 'info');
                         }
                     }
                 );
@@ -652,7 +483,21 @@
 
                         if (algorithm === 'aes') {
                             const wordArray = CryptoJS.lib.WordArray.create(zipArrayBuffer);
-                            encrypted = CryptoJS.AES.encrypt(wordArray, password).toString();
+                            const salt = CryptoJS.lib.WordArray.random(128 / 8); 
+                            const key = CryptoJS.PBKDF2(password, salt, {
+                                keySize: 256 / 32, 
+                                iterations: 1000 
+                            });
+                            const iv = CryptoJS.lib.WordArray.random(128 / 8); 
+                            
+                            const encryptedData = CryptoJS.AES.encrypt(wordArray, key, { 
+                                iv: iv,
+                                mode: CryptoJS.mode.CBC,
+                                padding: CryptoJS.pad.Pkcs7
+                            });
+                            
+                            encrypted = salt.toString(CryptoJS.enc.Hex) + iv.toString(CryptoJS.enc.Hex) + encryptedData.toString();
+
                         } else {
                             throw new Error(`Алгоритм ${algorithm} пока не поддерживается для шифрования.`);
                         }
@@ -664,7 +509,7 @@
                         encryptFilesInput.value = ""; 
                         updateFileListUI(encryptFolderInput, encryptFolderList, true);
                         updateFileListUI(encryptFilesInput, encryptFilesList, false);
-                        encryptFilenameInput.value = "encrypted_archive"; // Reset for next time
+                        encryptFilenameInput.value = "encrypted_archive"; 
 
                     } catch (e) {
                         console.error("Ошибка на этапе шифрования:", e);
@@ -696,7 +541,6 @@
             let outputFilename = decryptFilenameInput.value.trim();
              if (!outputFilename) {
                 if (file && file.name) {
-                    // Try to derive from input filename, removing .zip.aes or .aes
                     let baseName = file.name.replace(/\.zip\.aes$/i, '').replace(/\.aes$/i, '');
                     outputFilename = sanitizeFilename(baseName) || 'decrypted_archive';
                 } else {
@@ -706,7 +550,7 @@
             }
             const algorithm = decryptAlgoSelect.value;
 
-            decryptStatus.style.display = 'none';
+            decryptStatus.classList.add('hidden');
 
             if (!file) {
                 setOperationStatus(decryptStatus, 'Ошибка: .zip.aes файл не выбран.', 'error');
@@ -723,35 +567,47 @@
             const reader = new FileReader();
             reader.onload = function(event) {
                 try {
-                    const encryptedContent = event.target.result; 
+                    const encryptedFileContent = event.target.result; 
                     setOperationStatus(decryptStatus, 'Расшифровка... Это может занять некоторое время.', 'info');
                     
                     let decrypted;
                     if (algorithm === 'aes') {
-                         decrypted = CryptoJS.AES.decrypt(encryptedContent, password);
+                        const saltHex = encryptedFileContent.substring(0, 32);
+                        const ivHex = encryptedFileContent.substring(32, 64);
+                        const ciphertext = encryptedFileContent.substring(64);
+
+                        if (!saltHex || !ivHex || !ciphertext || saltHex.length !== 32 || ivHex.length !== 32) {
+                            throw new Error("Неверный формат файла: отсутствует соль/IV или они повреждены.");
+                        }
+                        
+                        const salt = CryptoJS.enc.Hex.parse(saltHex);
+                        const iv = CryptoJS.enc.Hex.parse(ivHex);
+                        
+                        const key = CryptoJS.PBKDF2(password, salt, {
+                            keySize: 256 / 32,
+                            iterations: 1000 
+                        });
+
+                        decrypted = CryptoJS.AES.decrypt(ciphertext, key, {
+                            iv: iv,
+                            mode: CryptoJS.mode.CBC,
+                            padding: CryptoJS.pad.Pkcs7
+                        });
+
                     } else {
                         throw new Error(`Алгоритм ${algorithm} пока не поддерживается для дешифрования.`);
                     }
 
-                    // Check for decryption failure (likely wrong password)
-                    if (!decrypted || decrypted.sigBytes === 0) {
+                    if (!decrypted || decrypted.sigBytes === 0 || decrypted.sigBytes < 0 ) { 
                         let message = 'Ошибка: Не удалось расшифровать файл. ';
-                        // Try to provide a more specific reason if possible
-                        let testString = "";
                         try {
-                             testString = decrypted.toString(CryptoJS.enc.Utf8); // This can throw "Malformed UTF-8"
-                        } catch(e) {
-                            // This catch itself often indicates wrong password if sigBytes was also 0 or very low
-                            message += 'Вероятно, неверный пароль или файл сильно поврежден (не удалось преобразовать данные).';
-                            setOperationStatus(decryptStatus, message, 'error');
-                            setButtonLoadingState(decryptButton, false);
-                            return;
-                        }
-
-                        if (decrypted.sigBytes === 0 || (decrypted.sigBytes > 0 && testString === '')) {
-                             message += 'Наиболее вероятная причина - неверный пароль.';
-                        } else {
-                             message += 'Возможно, файл поврежден или использовался другой алгоритм/ключ.';
+                            if (decrypted && decrypted.toString(CryptoJS.enc.Utf8) === '') { // Test conversion
+                                message += 'Наиболее вероятная причина - неверный пароль.';
+                            } else {
+                                message += 'Возможно, файл поврежден, неверный пароль или использовался другой алгоритм/ключ.';
+                            }
+                        } catch (e) {
+                             message += 'Вероятно, неверный пароль или файл сильно поврежден (не удалось преобразовать данные).';
                         }
                         setOperationStatus(decryptStatus, message, 'error');
                         setButtonLoadingState(decryptButton, false);
@@ -761,7 +617,7 @@
                     const typedArray = convertWordArrayToUint8Array(decrypted);
 
                     if (!typedArray || typedArray.length === 0) { 
-                        setOperationStatus(decryptStatus, 'Ошибка: Не удалось преобразовать расшифрованные данные. Файл может быть поврежден.', 'error');
+                        setOperationStatus(decryptStatus, 'Ошибка: Не удалось преобразовать расшифрованные данные. Файл может быть поврежден или пароль неверный.', 'error');
                         setButtonLoadingState(decryptButton, false);
                         return;
                     }
@@ -771,14 +627,14 @@
                     setOperationStatus(decryptStatus, `Успех: Файл расшифрован и скачан как ${outputFilename}.zip`, 'success');
                     decryptFileInput.value = ""; 
                     updateFileListUI(decryptFileInput, decryptFileList, false);
-                    decryptFilenameInput.value = "decrypted_archive"; // Reset for next time
+                    decryptFilenameInput.value = "decrypted_archive";
 
 
                 } catch (e) {
                     console.error("Ошибка дешифрования:", e);
                     let errMsg = 'Ошибка дешифрования: ' + e.message;
-                     if (e.message && (e.message.toLowerCase().includes("malformed utf-8 data") || e.message.toLowerCase().includes("ciphertext is too short"))) {
-                        errMsg = 'Ошибка: Неверный пароль или файл поврежден (не удалось обработать шифротекст).';
+                     if (e.message && (e.message.toLowerCase().includes("malformed utf-8 data") || e.message.toLowerCase().includes("ciphertext") || e.message.toLowerCase().includes("salt") || e.message.toLowerCase().includes("iv") )) {
+                        errMsg = 'Ошибка: Неверный пароль, файл поврежден или неверный формат файла (проблема с солью/IV/шифротекстом).';
                     }
                     setOperationStatus(decryptStatus, errMsg, 'error');
                 } finally {
@@ -798,19 +654,19 @@
             const words = wordArray.words;
             const result = new Uint8Array(l);
             let i = 0, j = 0;
-            while (i < l) {
+            while (true) {
+                if (i >= l) break; 
                 const w = words[j++];
                 result[i++] = (w >>> 24) & 0xff;
-                if (i === l) break;
+                if (i >= l) break;
                 result[i++] = (w >>> 16) & 0xff;
-                if (i === l) break;
+                if (i >= l) break;
                 result[i++] = (w >>> 8) & 0xff;
-                if (i === l) break;
+                if (i >= l) break;
                 result[i++] = w & 0xff;
             }
             return result;
         }
-
     </script>
 </body>
 </html>
