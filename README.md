@@ -1,5 +1,7 @@
 [Русская версия README](README_RU.md)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Sppqq/ed_pro)
+
 # 🛡️ Cipher Pro (Шифратор Pro)
 
 All-in-one client-side security toolkit: AES file/text encryption, image pixel scrambling, and file hashing, right in your browser. Your data stays local, and no files are ever uploaded to any server.
