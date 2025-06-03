@@ -4,7 +4,7 @@
 
 All-in-one client-side security toolkit: AES file/text encryption, image pixel scrambling, and file hashing, right in your browser. Your data stays local, and no files are ever uploaded to any server.
 
-**[Try it Live!](https://sppqq.github.io/ed_pro/)** *(Replace with your actual GitHub Pages link or other deployment link)*
+**[Try it Live!](https://ed.sppq.site)**
 
 *(Consider adding a screenshot or GIF of the application here)*
 <!-- ![Cipher Pro Screenshot](link_to_your_screenshot.png) -->
@@ -92,7 +92,7 @@ Contributions are welcome! If you have suggestions for improvements, new feature
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. *(Make sure you add a LICENSE file to your repository, e.g., by choosing one when creating the repo or adding it manually)*
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
