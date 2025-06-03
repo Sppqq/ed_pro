@@ -6,9 +6,6 @@ All-in-one client-side security toolkit: AES file/text encryption, image pixel s
 
 **[Try it Live!](https://ed.sppq.site)**
 
-*(Consider adding a screenshot or GIF of the application here)*
-<!-- ![Cipher Pro Screenshot](link_to_your_screenshot.png) -->
-
 ## Key Features
 
 *   **Secure File Encryption & Decryption:**
