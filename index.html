@@ -1,5 +1,3 @@
---- START OF FILE index(1).html ---
-
 <!DOCTYPE html>
 <html lang="ru" class=""> <!-- Added class for potential dark mode hook -->
 <head>
@@ -85,19 +83,19 @@
             color: #c7d2fe; /* indigo-200 */
         }
         .dark .main-button { color: white; }
-        .dark .main-button.bg-indigo-600 { background-color: #4f46e5; } 
+        .dark .main-button.bg-indigo-600 { background-color: #4f46e5; }
         .dark .main-button.bg-indigo-600:hover { background-color: #4338ca; }
-        .dark .main-button.bg-green-600 { background-color: #059669; } 
+        .dark .main-button.bg-green-600 { background-color: #059669; }
         .dark .main-button.bg-green-600:hover { background-color: #047857; }
-        .dark .main-button.bg-blue-600 { background-color: #2563eb; } 
+        .dark .main-button.bg-blue-600 { background-color: #2563eb; }
         .dark .main-button.bg-blue-600:hover { background-color: #1d4ed8; }
-        .dark .main-button.bg-purple-600 { background-color: #7c3aed; } 
+        .dark .main-button.bg-purple-600 { background-color: #7c3aed; }
         .dark .main-button.bg-purple-600:hover { background-color: #6d28d9; }
         .dark .main-button.bg-teal-600 { background-color: #0d9488; }
         .dark .main-button.bg-teal-600:hover { background-color: #0f766e; }
         .dark .main-button.bg-cyan-600 { background-color: #0891b2; }
         .dark .main-button.bg-cyan-600:hover { background-color: #0e7490; }
-        
+
         .dark .password-toggle { color: #9ca3af; }
         .dark .password-toggle:hover { color: #c7d2fe; }
         .dark ::-webkit-scrollbar-track { background: #374151; }
@@ -126,12 +124,12 @@
 
         .main-button .loader {
             border: 3px solid rgba(255,255,255,0.3);
-            border-top-color: #fff; 
+            border-top-color: #fff;
             border-radius: 50%;
-            width: 20px; 
+            width: 20px;
             height: 20px;
             animation: spin 0.8s linear infinite;
-            display: none; 
+            display: none;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -146,16 +144,16 @@
         textarea:focus {
             outline: 2px solid transparent;
             outline-offset: 2px;
-            --tw-ring-color: theme('colors.indigo.500'); 
+            --tw-ring-color: theme('colors.indigo.500');
             box-shadow: 0 0 0 2px var(--tw-ring-color);
             border-color: theme('colors.indigo.500');
         }
-        
+
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #a1a1a1; }
-        
+
         .tab-button.active {
              border-color: theme('colors.indigo.600');
              color: theme('colors.indigo.600');
@@ -213,7 +211,7 @@
         <!-- Секция Шифрования -->
         <div id="encrypt-tab" class="tab-content active">
             <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">Настройки шифрования</h2>
-            
+
             <div class="form-group mb-6">
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">1. Выберите исходные данные для шифрования:</label>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-6">
@@ -254,7 +252,7 @@
                         <p id="encrypt-password-strength-text" class="text-xs text-gray-500 dark:text-gray-400 mt-1"></p>
                     </div>
                 </div>
-                
+
                 <div class="form-group mb-6">
                     <label for="encrypt-algo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">3. Алгоритм шифрования:</label>
                     <select id="encrypt-algo" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-indigo-500 dark:focus:border-indigo-400 transition-shadow duration-200 ease-in-out bg-white dark:bg-gray-700">
@@ -282,7 +280,7 @@
         <!-- Секция Дешифрования -->
         <div id="decrypt-tab" class="tab-content hidden">
             <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">Расшифровать .zip.aes файл</h2>
-            
+
             <div class="form-group mb-6">
                 <label for="decrypt-file-input-trigger" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">1. Выберите .zip.aes файл:</label>
                  <div id="decrypt-file-drop-area" class="file-drop-area border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 sm:p-8 text-center cursor-pointer bg-gray-50 dark:bg-gray-700 hover:border-indigo-500 dark:hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-600 transition-all duration-200">
@@ -380,7 +378,7 @@
             </div>
             <div id="text-mode-status" class="status-message mt-4 px-4 py-3 rounded-lg text-sm hidden"></div>
         </div>
-        
+
         <!-- Секция Смешивания Пикселей -->
         <div id="scramble-tab" class="tab-content hidden">
             <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">Смешивание пикселей изображения</h2>
@@ -469,11 +467,14 @@
     </div>
 
     <footer class="text-center mt-auto mb-8 pt-6 border-t border-gray-300/70 dark:border-gray-700/70 text-sm text-gray-500 dark:text-gray-400 w-full max-w-3xl">
-        <p>&copy; <span id="currentYear"></span> Шифратор файлов Pro. Все операции выполняются в вашем браузере.</p>
-        <p class="mt-1">Создано с <i class="fas fa-heart text-red-500"></i> и технологиями: 
+        <p>&copy; <span id="currentYear"></span> Шифратор файлов Pro. Все операции выполняются локально в вашем браузере. Ваши файлы не загружаются на сервер.</p>
+        <p class="mt-1">Создано с <i class="fas fa-heart text-red-500"></i> и технологиями:
             <a href="https://github.com/brix/crypto-js" target="_blank" rel="noopener" class="text-indigo-600 dark:text-indigo-400 hover:underline">CryptoJS</a>,
             <a href="https://stuk.github.io/jszip/" target="_blank" rel="noopener" class="text-indigo-600 dark:text-indigo-400 hover:underline">JSZip</a>,
             <a href="https://github.com/eligrey/FileSaver.js/" target="_blank" rel="noopener" class="text-indigo-600 dark:text-indigo-400 hover:underline">FileSaver.js</a>.
+        </p>
+        <p class="mt-1">
+            <a href="https://github.com/Sppqq/ed_pro" target="_blank" rel="noopener" class="text-indigo-600 dark:text-indigo-400 hover:underline">Исходный код на GitHub</a>.
         </p>
     </footer>
 
@@ -550,7 +551,7 @@
         const copyInputTextButton = document.getElementById('copy-input-text');
         const copyOutputTextButton = document.getElementById('copy-output-text');
         const textModeStatus = document.getElementById('text-mode-status');
-        
+
         // Scramble Mode Elements
         const scrambleFileDropArea = document.getElementById('scramble-file-drop-area');
         const scrambleFileInput = document.getElementById('scramble-file-input');
@@ -575,19 +576,19 @@
         const hashOutputTextarea = document.getElementById('hash-output');
         const copyHashButton = document.getElementById('copy-hash-button');
         const hashStatus = document.getElementById('hash-status');
-        
+
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         // --- Tab Functionality ---
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 tabButtons.forEach(btn => btn.classList.remove('active', 'text-indigo-600', 'border-indigo-600', 'dark:text-indigo-400', 'dark:border-indigo-400'));
-                tabContents.forEach(content => content.classList.add('hidden')); 
+                tabContents.forEach(content => content.classList.add('hidden'));
 
                 button.classList.add('active', 'text-indigo-600', 'border-indigo-600', 'dark:text-indigo-400', 'dark:border-indigo-400');
                 const activeTabContent = document.getElementById(button.dataset.tab);
                 activeTabContent.classList.remove('hidden');
-                activeTabContent.classList.add('active'); 
+                activeTabContent.classList.add('active');
             });
         });
 
@@ -605,7 +606,7 @@
                 icon.classList.add('fa-eye');
             }
         }
-        
+
         // --- Password Strength Meter ---
         function updatePasswordStrength(password, strengthBarFillElement, strengthTextElement) {
             let strength = 0;
@@ -642,7 +643,7 @@
                 percentage = Math.min(100, (strength / 6) * 100);
                 barClass = 'bg-green-500 dark:bg-green-400';
             }
-            
+
             strengthBarFillElement.style.width = percentage + '%';
             strengthBarFillElement.className = `h-full rounded-full transition-all duration-300 ${barClass}`;
             strengthTextElement.textContent = `Надежность: ${text}`;
@@ -663,12 +664,12 @@
 
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropAreaElement.addEventListener(eventName, preventDefaults, false);
-                document.body.addEventListener(eventName, preventDefaults, false); 
+                document.body.addEventListener(eventName, preventDefaults, false);
             });
 
             ['dragenter', 'dragover'].forEach(eventName => {
                 dropAreaElement.addEventListener(eventName, () => {
-                    dropAreaElement.classList.add('bg-indigo-100', 'border-indigo-600', 'dark:bg-indigo-700', 'dark:border-indigo-500'); 
+                    dropAreaElement.classList.add('bg-indigo-100', 'border-indigo-600', 'dark:bg-indigo-700', 'dark:border-indigo-500');
                 }, false);
             });
 
@@ -697,24 +698,24 @@
                 }
             });
         }
-        
+
         function autoSuggestEncryptFilename(changedInputElement){
             if(!document.getElementById('encrypt-tab').classList.contains('active')) return;
 
             if(changedInputElement.id === encryptFolderInput.id && encryptFolderInput.files.length > 0 && encryptFolderInput.files[0].webkitRelativePath) {
                 const folderName = encryptFolderInput.files[0].webkitRelativePath.split('/')[0];
                 if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
-                encryptFilesInput.value = ""; 
+                encryptFilesInput.value = "";
                 updateFileListUI(encryptFilesInput, encryptFilesList, false);
-            } else if (changedInputElement.id === encryptFilesInput.id && encryptFilesInput.files.length > 0) { 
+            } else if (changedInputElement.id === encryptFilesInput.id && encryptFilesInput.files.length > 0) {
                  encryptFilenameInput.value = sanitizeFilename(encryptFilesInput.files[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
-                 encryptFolderInput.value = ""; 
+                 encryptFolderInput.value = "";
                  updateFileListUI(encryptFolderInput, encryptFolderList, true);
             } else if (encryptFolderInput.files.length === 0 && encryptFilesInput.files.length === 0) {
-                 encryptFilenameInput.value = 'encrypted_archive'; 
+                 encryptFilenameInput.value = 'encrypted_archive';
             }
         }
-        
+
         function autoSuggestDecryptFilename() {
             const file = decryptFileInput.files[0];
             if (file && file.name) {
@@ -734,7 +735,7 @@
             e.preventDefault();
             e.stopPropagation();
         }
-        
+
         function updateFileListUI(inputElement, listElement, isFolder = false) {
             const files = inputElement.files;
             const defaultTextMap = {
@@ -775,7 +776,7 @@
         // --- Status & Button Helpers ---
         function setOperationStatus(element, message, type = 'info') {
             element.textContent = message;
-            element.classList.remove('hidden'); 
+            element.classList.remove('hidden');
             let baseClasses = 'border px-4 py-3 rounded-lg text-sm';
             let typeClasses = '';
             switch (type) {
@@ -793,13 +794,13 @@
             button.classList.toggle('opacity-75', isLoading);
             button.classList.toggle('cursor-not-allowed', isLoading);
         }
-        
+
         function updateZipProgress(percentage) {
             encryptProgressBar.style.width = percentage + '%';
             encryptProgressBar.textContent = percentage > 5 ? Math.round(percentage) + '%' : '';
             encryptProgressContainer.classList.toggle('hidden', !(percentage > 0 && percentage < 100));
             if (percentage >= 100 || percentage <=0) {
-                 setTimeout(() => { 
+                 setTimeout(() => {
                     encryptProgressContainer.classList.add('hidden');
                     encryptProgressBar.style.width = '0%';
                     encryptProgressBar.textContent = '';
@@ -813,11 +814,11 @@
             const individualInputFiles = Array.from(encryptFilesInput.files);
             const filesToProcess = [...folderInputFiles, ...individualInputFiles];
             const password = encryptPasswordInput.value;
-            let outputFilename = encryptFilenameInput.value.trim() || 
-                                 (folderInputFiles.length > 0 && folderInputFiles[0].webkitRelativePath ? sanitizeFilename(folderInputFiles[0].webkitRelativePath.split('/')[0]) + "_encrypted" : 
+            let outputFilename = encryptFilenameInput.value.trim() ||
+                                 (folderInputFiles.length > 0 && folderInputFiles[0].webkitRelativePath ? sanitizeFilename(folderInputFiles[0].webkitRelativePath.split('/')[0]) + "_encrypted" :
                                  (individualInputFiles.length > 0 ? sanitizeFilename(individualInputFiles[0].name.split('.').slice(0, -1).join('.')) + "_encrypted" : 'encrypted_archive'));
             encryptFilenameInput.value = outputFilename;
-            
+
             encryptStatus.classList.add('hidden');
             updateZipProgress(0);
 
@@ -830,7 +831,7 @@
             try {
                 const zip = new JSZip();
                 for (const file of filesToProcess) zip.file(file.webkitRelativePath || file.name, file);
-                
+
                 encryptProgressContainer.classList.remove('hidden');
                 const zipBlob = await zip.generateAsync(
                     { type: "blob", compression: "DEFLATE", streamFiles: true },
@@ -846,17 +847,17 @@
                 reader.onload = (event) => {
                     try {
                         const wordArray = CryptoJS.lib.WordArray.create(event.target.result);
-                        const salt = CryptoJS.lib.WordArray.random(128 / 8); 
+                        const salt = CryptoJS.lib.WordArray.random(128 / 8);
                         const key = CryptoJS.PBKDF2(password, salt, { keySize: 256 / 32, iterations: 1000 });
-                        const iv = CryptoJS.lib.WordArray.random(128 / 8); 
+                        const iv = CryptoJS.lib.WordArray.random(128 / 8);
                         const encryptedData = CryptoJS.AES.encrypt(wordArray, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
                         const encrypted = salt.toString(CryptoJS.enc.Hex) + iv.toString(CryptoJS.enc.Hex) + encryptedData.toString();
                         saveAs(new Blob([encrypted], { type: 'application/octet-stream' }), `${outputFilename}.zip.aes`);
                         setOperationStatus(encryptStatus, `Успех: Файл зашифрован и скачан как ${outputFilename}.zip.aes`, 'success');
-                        encryptFolderInput.value = ""; encryptFilesInput.value = ""; 
+                        encryptFolderInput.value = ""; encryptFilesInput.value = "";
                         updateFileListUI(encryptFolderInput, encryptFolderList, true); updateFileListUI(encryptFilesInput, encryptFilesList, false);
-                        encryptFilenameInput.value = "encrypted_archive"; 
-                    } catch (e) { setOperationStatus(encryptStatus, 'Ошибка шифрования: ' + e.message, 'error'); } 
+                        encryptFilenameInput.value = "encrypted_archive";
+                    } catch (e) { setOperationStatus(encryptStatus, 'Ошибка шифрования: ' + e.message, 'error'); }
                     finally { setButtonLoadingState(encryptButton, false); updateZipProgress(0); }
                 };
                 reader.onerror = () => { setOperationStatus(encryptStatus, 'Ошибка чтения ZIP файла.', 'error'); setButtonLoadingState(encryptButton, false); updateZipProgress(0); };
@@ -868,7 +869,7 @@
         decryptButton.addEventListener('click', () => {
             const file = decryptFileInput.files[0];
             const password = decryptPasswordInput.value;
-            let outputFilename = decryptFilenameInput.value.trim() || 
+            let outputFilename = decryptFilenameInput.value.trim() ||
                                 (file && file.name ? sanitizeFilename(file.name.replace(/\.zip\.aes$/i, '').replace(/\.aes$/i, '')) || 'decrypted_archive' : 'decrypted_archive');
             decryptFilenameInput.value = outputFilename;
             decryptStatus.classList.add('hidden');
@@ -889,14 +890,14 @@
                     const ciphertextBase64 = encryptedContent.substring(64);
 
                     if (saltHex.length !== 32 || ivHex.length !== 32 || !ciphertextBase64) throw new Error("Неверный формат файла: соль/IV повреждены.");
-                    
+
                     const salt = CryptoJS.enc.Hex.parse(saltHex);
                     const iv = CryptoJS.enc.Hex.parse(ivHex);
                     const key = CryptoJS.PBKDF2(password, salt, { keySize: 256 / 32, iterations: 1000 });
                     const decrypted = CryptoJS.AES.decrypt(ciphertextBase64, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
 
                     if (!decrypted || decrypted.sigBytes <= 0) throw new Error("Не удалось расшифровать. Вероятно, неверный пароль или файл поврежден.");
-                    
+
                     const typedArray = convertWordArrayToUint8Array(decrypted);
                     if (!typedArray || typedArray.length === 0) throw new Error("Ошибка преобразования расшифрованных данных.");
 
@@ -904,7 +905,7 @@
                     setOperationStatus(decryptStatus, `Успех: Файл расшифрован и скачан как ${outputFilename}.zip`, 'success');
                     decryptFileInput.value = ""; updateFileListUI(decryptFileInput, decryptFileList, false);
                     decryptFilenameInput.value = "decrypted_archive";
-                } catch (e) { 
+                } catch (e) {
                     let errMsg = 'Ошибка дешифрования: ' + e.message;
                     if (e.message && (e.message.toLowerCase().includes("malformed utf-8 data") || e.message.toLowerCase().includes("ciphertext") || e.message.toLowerCase().includes("salt") || e.message.toLowerCase().includes("iv") )) {
                         errMsg = 'Ошибка: Неверный пароль, файл поврежден или неверный формат файла.';
@@ -913,13 +914,13 @@
                 } finally { setButtonLoadingState(decryptButton, false); }
             };
             reader.onerror = () => { setOperationStatus(decryptStatus, 'Ошибка чтения .zip.aes файла.', 'error'); setButtonLoadingState(decryptButton, false); };
-            reader.readAsText(file); 
+            reader.readAsText(file);
         });
-        
+
         function convertWordArrayToUint8Array(wordArray) {
             const l = wordArray.sigBytes; const words = wordArray.words; const result = new Uint8Array(l);
             let i = 0, j = 0;
-            while (i < l) { 
+            while (i < l) {
                 const w = words[j++];
                 result[i++] = (w >>> 24) & 0xff; if (i >= l) break;
                 result[i++] = (w >>> 16) & 0xff; if (i >= l) break;
@@ -940,7 +941,7 @@
 
             if (!text) return setOperationStatus(textModeStatus, `Ошибка: Введите текст для ${isEncrypt ? 'шифрования' : 'дешифрования'}.`, 'error');
             if (!password) return setOperationStatus(textModeStatus, 'Ошибка: Введите пароль.', 'error');
-            
+
             setButtonLoadingState(textEncryptButton, true); setButtonLoadingState(textDecryptButton, true);
             setOperationStatus(textModeStatus, `${isEncrypt ? 'Шифрование' : 'Дешифрование'} текста...`, 'info');
 
@@ -965,7 +966,7 @@
                         const key = CryptoJS.PBKDF2(password, salt, { keySize: 256 / 32, iterations: 1000 });
                         const decrypted = CryptoJS.AES.decrypt({ ciphertext: CryptoJS.enc.Hex.parse(cipherTextHex) }, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
                         const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-                        
+
                         if (decrypted.sigBytes <= 0 || (decryptedText === "" && cipherTextHex.length > 0)) throw new Error("Не удалось расшифровать. Вероятно, неверный пароль.");
                         textOutput.value = decryptedText;
                         setOperationStatus(textModeStatus, 'Текст успешно расшифрован.', 'success');
@@ -979,7 +980,7 @@
                 }
             }, 10); // Small timeout
         }
-        
+
         copyInputTextButton.addEventListener('click', () => copyToClipboard(textInput.value, textModeStatus, "Введенный текст"));
         copyOutputTextButton.addEventListener('click', () => copyToClipboard(textOutput.value, textModeStatus, "Результат"));
         copyHashButton.addEventListener('click', () => copyToClipboard(hashOutputTextarea.value, hashStatus, "Хеш"));
@@ -993,7 +994,7 @@
                 setOperationStatus(statusElement, `Нет ${subject.toLowerCase()} для копирования.`, 'info');
             }
         }
-        
+
         // --- Hashing Logic ---
         computeHashButton.addEventListener('click', () => {
             const file = hashFileInput.files[0];
@@ -1024,7 +1025,7 @@
                     setOperationStatus(hashStatus, `${algorithm} хеш успешно вычислен.`, 'success');
                     hashProgressBar.style.width = '100%'; hashProgressBar.textContent = '100%';
                     setTimeout(() => { hashProgressContainer.classList.add('hidden'); hashProgressBar.style.width = '0%'; hashProgressBar.textContent = '0%'; }, 1000);
-                } catch (err) { setOperationStatus(hashStatus, 'Ошибка хеширования: ' + err.message, 'error'); hashProgressContainer.classList.add('hidden');} 
+                } catch (err) { setOperationStatus(hashStatus, 'Ошибка хеширования: ' + err.message, 'error'); hashProgressContainer.classList.add('hidden');}
                 finally { setButtonLoadingState(computeHashButton, false); }
             };
             reader.onerror = () => { setOperationStatus(hashStatus, 'Ошибка чтения файла.', 'error'); setButtonLoadingState(computeHashButton, false); hashProgressContainer.classList.add('hidden'); };
@@ -1047,7 +1048,7 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
-        
+
         function dataURLtoBlob(dataurl) {
             var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
                 bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
@@ -1086,7 +1087,7 @@
                         const salt = "aConstantSaltForPixelScramble"; // Fixed salt for this specific feature
                         const derivedKey = CryptoJS.PBKDF2(password, salt, { keySize: 32/32, iterations: 500 }); // 4 bytes for seed
                         const numericSeed = derivedKey.words[0]; // Use the first 32-bit word as an integer seed
-                        
+
                         const seededRandom = mulberry32(numericSeed);
 
                         const pixelOrder = Array.from({length: numPixels}, (_, i) => i);
@@ -1113,14 +1114,14 @@
                                 newPixelData[newIdx + 3] = pixels[oldIdx + 3];
                             }
                         }
-                        
+
                         const newImageData = new ImageData(newPixelData, img.width, img.height);
                         ctx.putImageData(newImageData, 0, 0);
-                        
+
                         const outputDataURL = imageProcessingCanvas.toDataURL('image/png');
                         const originalFilename = sanitizeFilename(file.name.split('.').slice(0, -1).join('.') || "image");
                         const outputFilename = `${isScrambleMode ? 'scrambled' : 'restored'}_${originalFilename}.png`;
-                        
+
                         saveAs(dataURLtoBlob(outputDataURL), outputFilename);
                         setOperationStatus(scrambleStatus, `Успех: Изображение ${isScrambleMode ? 'смешано' : 'восстановлено'} и скачано как ${outputFilename}.`, 'success');
 
