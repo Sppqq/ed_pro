@@ -40,7 +40,7 @@
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             width: 100%;
-            max-width: 700px; /* Можно увеличить, если контент стал шире */
+            max-width: 700px;
             margin-top: 20px;
         }
 
@@ -155,12 +155,6 @@
             cursor: pointer;
             background-color: var(--light-color);
             transition: background-color 0.2s ease, border-color 0.2s ease;
-            /* Добавим flex для центрирования контента внутри, если он станет меньше */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 150px; /* Примерная высота для обычного состояния */
         }
         .file-drop-area.dragover {
             background-color: #e2e6ea;
@@ -274,64 +268,6 @@
             display: block;
             margin-top: 5px;
         }
-        
-        /* Горизонтальное размещение инпутов файлов */
-        .file-inputs-horizontal {
-            display: flex;
-            gap: 20px; /* Расстояние между двумя блоками выбора */
-            margin-bottom: 20px; /* Отступ снизу от этой группы */
-        }
-
-        .form-group-horizontal {
-            flex: 1; /* Занимают равное доступное пространство */
-            margin-bottom: 0; /* Убираем стандартный отступ, так как он есть у родителя */
-        }
-
-        .file-inputs-horizontal .file-drop-area {
-            padding: 20px; /* Уменьшим паддинг */
-            min-height: 120px; /* Можно задать минимальную высоту */
-        }
-        .file-inputs-horizontal .file-drop-area i {
-            font-size: 1.5rem; /* Уменьшим иконку */
-            margin-bottom: 8px;
-        }
-        .file-inputs-horizontal .file-drop-area p {
-            font-size: 0.9rem; /* Уменьшим текст */
-            /* Уменьшим текст еще, чтобы помещался в одну строку */
-            line-height: 1.2; 
-        }
-         .file-inputs-horizontal .file-drop-area p strong {
-            display: block; /* Сделать "нажмите чтобы выбрать" на новой строке если не влазит */
-            margin-top: 3px;
-        }
-
-
-        /* Адаптивность: если экран слишком узкий, возвращаем их в столбик */
-        @media (max-width: 650px) { /* Немного увеличил breakpoint */
-            .file-inputs-horizontal {
-                flex-direction: column; /* Ставим в столбик на маленьких экранах */
-                gap: 15px;
-            }
-            .form-group-horizontal {
-                margin-bottom: 15px; /* Возвращаем отступ, если они в столбик */
-            }
-            .form-group-horizontal:last-child {
-                margin-bottom: 0;
-            }
-             /* Вернуть размеры для drop-area на маленьких экранах, если они уменьшались */
-            .file-inputs-horizontal .file-drop-area {
-                padding: 30px;
-                min-height: 150px;
-            }
-            .file-inputs-horizontal .file-drop-area i {
-                font-size: 2rem;
-                margin-bottom: 10px;
-            }
-            .file-inputs-horizontal .file-drop-area p {
-                font-size: 1rem;
-            }
-        }
-
 
         footer {
             text-align: center;
@@ -363,30 +299,27 @@
             <button class="tab-button" data-tab="decrypt-tab"><i class="fas fa-unlock-alt"></i> Дешифрование</button>
         </div>
 
-        <!-- Секция Шифрования (обновленная) -->
+        <!-- Секция Шифрования -->
         <div id="encrypt-tab" class="tab-content active">
             <h2>Зашифровать файлы/папки</h2>
-
-            <div class="file-inputs-horizontal"> 
-                <div class="form-group form-group-horizontal"> 
-                    <label for="encrypt-folder-input-trigger">1. Папка (опционально):</label>
-                    <div id="encrypt-folder-drop-area" class="file-drop-area">
-                        <input type="file" id="encrypt-folder-input" webkitdirectory directory multiple>
-                        <i class="fas fa-folder-open"></i>
-                        <p>Перетащите или <strong>выберите</strong></p>
-                    </div>
-                    <div id="encrypt-folder-list" class="file-list">Папка не выбрана.</div>
+            <div class="form-group">
+                <label for="encrypt-folder-input-trigger">1. Выберите папку (опционально, для сохранения структуры):</label>
+                <div id="encrypt-folder-drop-area" class="file-drop-area">
+                    <input type="file" id="encrypt-folder-input" webkitdirectory directory multiple> <!-- multiple for safety, though one folder is typical -->
+                    <i class="fas fa-folder-open"></i>
+                    <p>Перетащите папку сюда или <strong>нажмите, чтобы выбрать папку</strong></p>
                 </div>
+                <div id="encrypt-folder-list" class="file-list">Папка не выбрана.</div>
+            </div>
 
-                <div class="form-group form-group-horizontal"> 
-                    <label for="encrypt-files-input-trigger">2. Файлы (опционально):</label>
-                    <div id="encrypt-files-drop-area" class="file-drop-area">
-                        <input type="file" id="encrypt-files-input" multiple>
-                        <i class="fas fa-file-alt"></i>
-                        <p>Перетащите или <strong>выберите</strong></p>
-                    </div>
-                    <div id="encrypt-files-list" class="file-list">Файлы не выбраны.</div>
+            <div class="form-group">
+                <label for="encrypt-files-input-trigger">2. Или/И выберите отдельные файлы (опционально):</label>
+                <div id="encrypt-files-drop-area" class="file-drop-area">
+                    <input type="file" id="encrypt-files-input" multiple>
+                    <i class="fas fa-file-alt"></i>
+                    <p>Перетащите файлы сюда или <strong>нажмите, чтобы выбрать файлы</strong></p>
                 </div>
+                <div id="encrypt-files-list" class="file-list">Файлы не выбраны.</div>
             </div>
 
             <div class="form-group">
@@ -420,7 +353,7 @@
             <div id="encrypt-status" class="status-message"></div>
         </div>
 
-        <!-- Секция Дешифрования (без изменений в этой итерации) -->
+        <!-- Секция Дешифрования -->
         <div id="decrypt-tab" class="tab-content">
             <h2>Расшифровать .zip.aes файл в .zip</h2>
             <div class="form-group">
@@ -461,19 +394,22 @@
             </button>
             <div id="decrypt-status" class="status-message"></div>
         </div>
-    </div> <!-- container end -->
+    </div>
 
     <footer>
-        <!-- ... футер ... -->
+        <p>&copy; <span id="currentYear"></span> Шифратор файлов Pro. Все операции выполняются в вашем браузере.</p>
+        <p>Создано с <i class="fas fa-heart" style="color: #dc3545;"></i> и технологиями: 
+            <a href="https://github.com/brix/crypto-js" target="_blank" rel="noopener">CryptoJS</a>, 
+            <a href="https://stuk.github.io/jszip/" target="_blank" rel="noopener">JSZip</a>, 
+            <a href="https://github.com/eligrey/FileSaver.js/" target="_blank" rel="noopener">FileSaver.js</a>.
+        </p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    
+
     <script>
-        // JavaScript (полностью тот же, что и в предыдущем ответе)
-        // ... (скопируйте весь JS из предыдущего ответа сюда) ...
         // --- UI Elements ---
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -539,8 +475,15 @@
 
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropAreaElement.addEventListener(eventName, preventDefaults, false);
-                if (eventName !== 'drop' && eventName !== 'dragleave') { // Avoid double body listener for drop/leave from dropArea
-                    document.body.addEventListener(eventName, preventDefaults, false); 
+                // Prevent body from handling drops if they are over our drop area
+                if (eventName === 'dragover' || eventName === 'drop') {
+                     dropAreaElement.addEventListener(eventName, (e) => {
+                        if (e.target === dropAreaElement || dropAreaElement.contains(e.target)) {
+                           // Body default prevention is already handled, but ensure drop area gets priority
+                        }
+                    }, false);
+                } else {
+                     document.body.addEventListener(eventName, preventDefaults, false); // For general drag over window
                 }
             });
 
@@ -553,19 +496,33 @@
             });
 
             dropAreaElement.addEventListener('drop', (e) => {
+                // For folder drop, dataTransfer.items might be better but files is simpler for now.
+                // Note: Dragging a folder might only give one item in e.dataTransfer.files.
+                // The `webkitdirectory` attribute is primarily for the click-to-select dialog.
+                // For drag-and-drop of folders, browser behavior varies. We'll rely on click for reliable folder selection.
                 fileInputElement.files = e.dataTransfer.files;
                 updateFileListUI(fileInputElement, fileListElement, isFolderInput);
-                updateEncryptFilenameBasedOnSelection(isFolderInput, fileInputElement.files);
+                if (isFolderInput && fileInputElement.files.length > 0 && fileInputElement.files[0].webkitRelativePath) {
+                    const folderName = fileInputElement.files[0].webkitRelativePath.split('/')[0];
+                    if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
+                } else if (!isFolderInput && fileInputElement.files.length > 0 && encryptFilenameInput.value === 'encrypted_archive') {
+                     encryptFilenameInput.value = sanitizeFilename(fileInputElement.files[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
+                }
             }, false);
 
             fileInputElement.addEventListener('change', () => {
                  updateFileListUI(fileInputElement, fileListElement, isFolderInput);
-                 updateEncryptFilenameBasedOnSelection(isFolderInput, fileInputElement.files);
+                 if (isFolderInput && fileInputElement.files.length > 0 && fileInputElement.files[0].webkitRelativePath) {
+                    const folderName = fileInputElement.files[0].webkitRelativePath.split('/')[0];
+                    if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
+                } else if (!isFolderInput && fileInputElement.files.length > 0 && encryptFilenameInput.value === 'encrypted_archive' && !encryptFolderInput.files.length) {
+                    // Set filename from individual files only if folder is not selected or default name is present
+                     encryptFilenameInput.value = sanitizeFilename(fileInputElement.files[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
+                }
             });
         }
         
         function sanitizeFilename(name) {
-            if (!name) return "";
             return name.replace(/[^a-z0-9_.-]/gi, '_').replace(/__+/g, '_');
         }
 
@@ -578,41 +535,18 @@
             const files = inputElement.files;
             if (!files || files.length === 0) {
                 listElement.textContent = isFolder ? 'Папка не выбрана.' : (inputElement.id.includes('decrypt') ? 'Файл не выбран.' : 'Файлы не выбраны.');
-                 if (inputElement.id === 'encrypt-folder-input' && encryptFilesInput.files.length === 0) {
-                    encryptFilenameInput.value = "encrypted_archive"; // Reset if both empty
-                } else if (inputElement.id === 'encrypt-files-input' && encryptFolderInput.files.length === 0) {
-                    encryptFilenameInput.value = "encrypted_archive"; // Reset if both empty
-                }
-
             } else if (isFolder) {
+                // For folder, webkitRelativePath gives the path inside the folder.
+                // The first file's path component is the folder name.
                 const folderName = files[0].webkitRelativePath ? files[0].webkitRelativePath.split('/')[0] : "Выбранная папка";
-                listElement.textContent = `Папка: ${folderName} (${files.length} элемент(ов))`;
+                listElement.textContent = `Выбрана папка: ${folderName} (${files.length} элемент(ов) внутри)`;
             }
-            else if (files.length === 1 && !inputElement.webkitdirectory) { // Check for !webkitdirectory for individual files
-                listElement.textContent = `Файл: ${files[0].name}`;
-            } else { // Multiple individual files
-                listElement.textContent = `Файлов: ${files.length}`;
-            }
-        }
-
-        function updateEncryptFilenameBasedOnSelection(isFolderInput, files) {
-            if (!encryptFilenameInput) return; // Safety check
-
-            const currentFilename = encryptFilenameInput.value;
-            const isDefaultFilename = currentFilename === 'encrypted_archive' || currentFilename.endsWith("_encrypted");
-
-            if (isFolderInput && files.length > 0 && files[0].webkitRelativePath) {
-                const folderName = files[0].webkitRelativePath.split('/')[0];
-                if (folderName) encryptFilenameInput.value = sanitizeFilename(folderName) + "_encrypted";
-            } else if (!isFolderInput && files.length > 0 && (!encryptFolderInput.files || encryptFolderInput.files.length === 0)) {
-                // Only update from individual files if folder is not selected or if filename is still default
-                if (isDefaultFilename || !currentFilename) {
-                    const firstFileName = files[0].name.split('.').slice(0, -1).join('.') || files[0].name;
-                    encryptFilenameInput.value = sanitizeFilename(firstFileName) + "_encrypted";
-                }
+            else if (files.length === 1) {
+                listElement.textContent = `Выбран файл: ${files[0].name}`;
+            } else {
+                listElement.textContent = `Выбрано файлов: ${files.length}`;
             }
         }
-
 
         setupFileDrop(encryptFolderDropArea, encryptFolderInput, encryptFolderList, true);
         setupFileDrop(encryptFilesDropArea, encryptFilesInput, encryptFilesList, false);
@@ -620,13 +554,9 @@
 
 
         // --- Status & Button Helpers ---
-        function setOperationStatus(element, message, type = 'info', isProgressUpdate = false) {
-            // For progress updates, we only want to change text if it's not an error/success
-            if (isProgressUpdate && (element.classList.contains('error') || element.classList.contains('success'))) {
-                return; 
-            }
+        function setOperationStatus(element, message, type = 'info') {
             element.textContent = message;
-            element.className = `status-message ${type}`; 
+            element.className = `status-message ${type}`; // Resets other types
         }
 
         function setButtonLoadingState(button, isLoading) {
@@ -660,21 +590,19 @@
 
             const password = encryptPasswordInput.value;
             let outputFilename = encryptFilenameInput.value.trim();
-            if (!outputFilename || outputFilename === "encrypted_archive") { // Auto-generate if empty or default
+            if (!outputFilename) {
                 if (folderInputFiles.length > 0 && folderInputFiles[0].webkitRelativePath) {
                      outputFilename = sanitizeFilename(folderInputFiles[0].webkitRelativePath.split('/')[0]) + "_encrypted";
                 } else if (individualInputFiles.length > 0) {
-                     const firstFileName = individualInputFiles[0].name.split('.').slice(0, -1).join('.') || individualInputFiles[0].name;
-                     outputFilename = sanitizeFilename(firstFileName) + "_encrypted";
+                     outputFilename = sanitizeFilename(individualInputFiles[0].name.split('.').slice(0, -1).join('.')) + "_encrypted";
                 } else {
-                    outputFilename = 'encrypted_archive'; // Fallback
+                    outputFilename = 'encrypted_archive';
                 }
-                encryptFilenameInput.value = outputFilename; 
+                encryptFilenameInput.value = outputFilename; // Update UI
             }
 
             const algorithm = encryptAlgoSelect.value;
 
-            encryptStatus.className = 'status-message'; // Clear previous status type
             encryptStatus.style.display = 'none';
             updateZipProgress(0);
 
@@ -736,14 +664,14 @@
                         encryptFilesInput.value = ""; 
                         updateFileListUI(encryptFolderInput, encryptFolderList, true);
                         updateFileListUI(encryptFilesInput, encryptFilesList, false);
-                        encryptFilenameInput.value = "encrypted_archive"; 
+                        encryptFilenameInput.value = "encrypted_archive"; // Reset for next time
 
                     } catch (e) {
                         console.error("Ошибка на этапе шифрования:", e);
                         setOperationStatus(encryptStatus, 'Ошибка шифрования: ' + e.message, 'error');
                     } finally {
                         setButtonLoadingState(encryptButton, false);
-                        updateZipProgress(0); // Make sure progress is reset
+                        updateZipProgress(0);
                     }
                 };
                 reader.onerror = function() {
@@ -766,18 +694,18 @@
             const file = decryptFileInput.files[0];
             const password = decryptPasswordInput.value;
             let outputFilename = decryptFilenameInput.value.trim();
-             if (!outputFilename || outputFilename === "decrypted_archive") { // Auto-generate if empty or default
+             if (!outputFilename) {
                 if (file && file.name) {
+                    // Try to derive from input filename, removing .zip.aes or .aes
                     let baseName = file.name.replace(/\.zip\.aes$/i, '').replace(/\.aes$/i, '');
                     outputFilename = sanitizeFilename(baseName) || 'decrypted_archive';
                 } else {
-                    outputFilename = 'decrypted_archive'; // Fallback
+                    outputFilename = 'decrypted_archive';
                 }
                 decryptFilenameInput.value = outputFilename;
             }
             const algorithm = decryptAlgoSelect.value;
 
-            decryptStatus.className = 'status-message'; // Clear previous status type
             decryptStatus.style.display = 'none';
 
             if (!file) {
@@ -804,30 +732,25 @@
                     } else {
                         throw new Error(`Алгоритм ${algorithm} пока не поддерживается для дешифрования.`);
                     }
-                    
-                    let testString = "";
-                    if (decrypted) { // Check if decrypted is not null/undefined
-                        try {
-                            testString = decrypted.toString(CryptoJS.enc.Utf8);
-                        } catch (e) {
-                            // This catch can indicate wrong password if sigBytes was also 0 or very low,
-                            // or if data is genuinely malformed.
-                            // We'll handle the primary check below with sigBytes.
-                            console.warn("Error during Utf8 conversion, likely wrong password/corrupt:", e.message);
-                        }
-                    }
 
-
-                    if (!decrypted || decrypted.sigBytes === 0 || (decrypted.sigBytes > 0 && testString === '' && !/^PK/.test(arrayBufferToPreviewString(decrypted)))) {
-                        // The /^PK/.test is a heuristic: valid ZIPs usually start with 'PK'
-                        // If sigBytes > 0, but Utf8 is empty AND it doesn't look like a ZIP, then it's likely wrong password.
+                    // Check for decryption failure (likely wrong password)
+                    if (!decrypted || decrypted.sigBytes === 0) {
                         let message = 'Ошибка: Не удалось расшифровать файл. ';
-                        if (decrypted && decrypted.sigBytes === 0) {
-                             message += 'Наиболее вероятная причина - неверный пароль (нет расшифрованных данных).';
-                        } else if (decrypted && decrypted.sigBytes > 0 && testString === '') {
-                             message += 'Наиболее вероятная причина - неверный пароль (расшифрованные данные не являются текстом и не похожи на ZIP).';
+                        // Try to provide a more specific reason if possible
+                        let testString = "";
+                        try {
+                             testString = decrypted.toString(CryptoJS.enc.Utf8); // This can throw "Malformed UTF-8"
+                        } catch(e) {
+                            // This catch itself often indicates wrong password if sigBytes was also 0 or very low
+                            message += 'Вероятно, неверный пароль или файл сильно поврежден (не удалось преобразовать данные).';
+                            setOperationStatus(decryptStatus, message, 'error');
+                            setButtonLoadingState(decryptButton, false);
+                            return;
                         }
-                        else {
+
+                        if (decrypted.sigBytes === 0 || (decrypted.sigBytes > 0 && testString === '')) {
+                             message += 'Наиболее вероятная причина - неверный пароль.';
+                        } else {
                              message += 'Возможно, файл поврежден или использовался другой алгоритм/ключ.';
                         }
                         setOperationStatus(decryptStatus, message, 'error');
@@ -848,7 +771,7 @@
                     setOperationStatus(decryptStatus, `Успех: Файл расшифрован и скачан как ${outputFilename}.zip`, 'success');
                     decryptFileInput.value = ""; 
                     updateFileListUI(decryptFileInput, decryptFileList, false);
-                    decryptFilenameInput.value = "decrypted_archive";
+                    decryptFilenameInput.value = "decrypted_archive"; // Reset for next time
 
 
                 } catch (e) {
@@ -869,14 +792,6 @@
             reader.readAsText(file); 
         });
 
-        function arrayBufferToPreviewString(wordArray) {
-            try {
-                const typedArray = convertWordArrayToUint8Array(wordArray);
-                const firstBytes = typedArray.slice(0, 2); // Check first 2 bytes for 'PK'
-                return String.fromCharCode.apply(null, firstBytes);
-            } catch(e) { return "";}
-        }
-
         // Helper to convert WordArray to Uint8Array
         function convertWordArrayToUint8Array(wordArray) {
             const l = wordArray.sigBytes;
@@ -895,6 +810,7 @@
             }
             return result;
         }
+
     </script>
 </body>
 </html>
